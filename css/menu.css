@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+th {
+	width: 100px;
+	background-color: lightblue;
+}
+
+#navSpace {
+	line-height: 68px;
+}
+

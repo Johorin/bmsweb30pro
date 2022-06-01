@@ -15,7 +15,7 @@ $authInfo = authenticate();
 	</head>
     <body>
         <header>
-        	<h2 align="center">書籍管理システム</h2>
+        	<h2 align="center">書籍管理システムVer3.0応用</h2>
         	<hr style="border: 2px solid blue;">
         	<h3 align="center">MENU</h3>
         	<div class="loginInfo" style="position: absolute; top: 55px; right: 60px;">

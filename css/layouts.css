@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+*, body {
+	text-align: center;
+	margin: 0 auto;
+}
+
+input {
+	text-align: left;
+}
+
+#logo {
+	margin: 20px 0;
+}
+
+#blueLine1 {
+	border: 2px solid blue;
+}
+#blackLine1 {
+	border: 1px solid black;
+}
+#blueLine2 {
+	border: 1px solid blue;
+}
+
+#copyRight {
+	margin: 16px 0;
+}
