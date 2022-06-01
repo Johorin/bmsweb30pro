@@ -5,19 +5,33 @@ $(function() {
 		//id="textbox"のvalue値を取得
 		var _textbox = $(this).val();	//"_変数名"とすることでPrivateな変数であることを表現
 		//クラスメソッドcheck_loginでで入力チェックとエラーメッセージ表示処理を実行
-		CheckLoginData.checkLogin(_textbox, 'user');
+		CheckData.check(_textbox, 'user');
 	});
 
 	$("#pass").bind("blur", function() {
 		//id="textbox"のvalue値を取得
 		var _textbox = $(this).val();	//"_変数名"とすることでPrivateな変数であることを表現
 		//クラスメソッドcheck_loginで入力チェックとエラーメッセージ表示処理を実行
-		CheckLoginData.checkLogin(_textbox, 'pass');
+		CheckData.check(_textbox, 'pass');
+	});
+
+	$("#newTitle").bind("blur", function() {
+		//id="textbox"のvalue値を取得
+		var _textbox = $(this).val();	//"_変数名"とすることでPrivateな変数であることを表現
+		//クラスメソッドcheck_loginで入力チェックとエラーメッセージ表示処理を実行
+		CheckData.check(_textbox, 'title');
+	});
+
+	$("#newPrice").bind("blur", function() {
+		//id="textbox"のvalue値を取得
+		var _textbox = $(this).val();	//"_変数名"とすることでPrivateな変数であることを表現
+		//クラスメソッドcheck_loginで入力チェックとエラーメッセージ表示処理を実行
+		CheckData.check(_textbox, 'price');
 	});
 });
 
-class CheckLoginData {
-	static checkLogin(checkValue, target) {
+class CheckData {
+	static check(checkValue, target) {
 		//id="#err_text_user"の子孫セレクタのp要素を削除（同じエラーが繰り返し表示されないように）
 		$("#err_text_" + target + " p").remove();
 
@@ -35,6 +49,10 @@ class CheckLoginData {
 				$("#err_text_" + target).append('<p style="color: red;">ユーザー名を入力して下さい。</p>');
 			} else if(target === 'pass') {
 				$("#err_text_" + target).append('<p style="color: red;">パスワードを入力して下さい。</p>');
+			} else if(target === 'title') {
+				$("#err_text_" + target).append('<p style="color: red;">タイトルを入力して下さい。</p>');
+			} else if(target === 'price') {
+				$("#err_text_" + target).append('<p style="color: red;">価格を入力して下さい。</p>');
 			}
 			_result = false;
 		}
@@ -44,13 +62,56 @@ class CheckLoginData {
 				$("#err_text_user" + target).append('<p style="color: red;">ユーザー名は50文字以内で入力して下さい。</p>');
 			} else if(target === 'pass') {
 				$("#err_text_user" + target).append('<p style="color: red;">パスワードは50文字以内で入力して下さい。</p>');
+			} else if(target === 'title') {
+				$("#err_text_" + target).append('<p style="color: red;">タイトルは50文字以内で入力して下さい。</p>');
+			} else if(target === 'price') {
+				$("#err_text_" + target).append('<p style="color: red;">価格は50文字以内で入力して下さい。</p>');
 			}
 			_result = false;
+		}
+		if((target === 'price') && is_numeric(_textbox)) {
+			$("#err_text_" + target + "Num").append('<p style="color: red;">価格は数値を入力して下さい。</p>');
 		}
 
 		return _result;
 	}
 }
+
+function do_check() {
+	var result = true;
+	var check_result = true;
+
+	$(".err_text").empty();
+
+	//user
+	var _textbox = $("#user").val();
+	result = CheckData.check(_textbox);
+	if(!result) {
+		check_result = result;
+	}
+
+	//pass
+	var _textbox = $("#pass").val();
+	result = CheckData.check(_textbox);
+	if(!result) {
+		check_result = result;
+	}
+
+	//上記条件が全てtrueならcheck_resultもtrue
+	return check_result;
+}
+
+function do_submit() {
+//	$(btn).css("pointer-events", "none");
+	var result = do_check();
+
+	if(result) {
+		alert("入力チェックOKです！");
+	} else {
+//		$(btn).css("pointer-events", "inherit");
+	}
+}
+
 //
 ///*
 // * 関数名：check_userValue

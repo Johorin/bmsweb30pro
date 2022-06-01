@@ -75,7 +75,7 @@ if(isset($_POST['loginButton'])) {  //ログインボタンからのアクセス
     			<div class="err_text_user" id="err_text_user"></div>
     			<div class="err_text_pass" id="err_text_pass"></div>
         		<br><br>
-        		<input type="submit" name="loginButton" value="ログイン">
+        		<input type="submit" onclick="do_submit()" name="loginButton" value="ログイン">
     		</form>
     	</center>
     </main>
@@ -86,5 +86,5 @@ if(isset($_POST['loginButton'])) {  //ログインボタンからのアクセス
     </footer>
     </body>
 	<script src="./ajax/jquery-3.6.0.min.js"></script>
-	<script src="./ajax/loginCheck.js"></script>
+	<script src="./ajax/dataCheck.js"></script>
 </html>
