@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.forms {
+	display: inline-flex;
+}
+
+#adminTable th {
+	width: 25vw;
+	background-color: lightblue;
+}
+
+#adminTable td a {
+	margin-right: 20px;
+}
+
+#ordinalUserTable th {
+	width: 20vw;
+	background-color: lightblue;
+}

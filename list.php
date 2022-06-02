@@ -24,22 +24,26 @@ mysqli_free_result($selectResult);
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/layouts.css">
+		<link rel="stylesheet" type="text/css" href="./css/list.css">
 		<title>書籍一覧画面</title>
 	</head>
     <body>
     	<header>
-        	<h2 align="center">書籍管理システムVer3.0応用</h2>
-        	<hr style="border: 2px solid blue;">
-        	<div class="float-left" style="position: absolute; top: 83px; left: 20px;">
-        		<a href="./menu.php" style="margin: 0 20px 0 0;">[メニュー]</a>
-        		<a href="./insert.php">[書籍登録]</a>
+        	<h2 id="title">書籍管理システムVer3.0応用</h2>
+        	<div id="navSpace">
+        		<hr id="blueLine1">
+            	<div class="float-left">
+            		<a href="./menu.php" class="nav">[メニュー]</a>
+            		<a href="./insert.php" class="nav">[書籍登録]</a>
+            	</div>
+        		<h3 id="title">書籍一覧</h3>
+            	<div class="loginInfo">
+            		<p>名前：<?=$authInfo['userName']?></p>
+            		<p>権限：<?=$authInfo['authority']?></p>
+            	</div>
+        		<hr id="blackLine1">
         	</div>
-        	<h3 align="center">書籍一覧</h3>
-        	<div class="loginInfo" style="position: absolute; top: 55px; right: 60px;">
-        		<p>名前：<?=$authInfo['userName']?></p>
-        		<p>権限：<?=$authInfo['authority']?></p>
-        	</div>
-        	<hr style="border: 1px solid black;">
         </header>
         <main>
         	<br><br>
@@ -47,7 +51,7 @@ mysqli_free_result($selectResult);
         	//管理者でログインしている時の画面表示
         	if($authInfo['authority'] == '管理者') {?>
             	<!-- フォーム部分 -->
-            	<div class="forms" style="display: inline-flex;">
+            	<div class="forms">
                 	<form action="./search.php" method="post">
                 		　ISBN<input type="text" name="isbn">
                 		　TITLE<input type="text" name="title">
@@ -60,17 +64,17 @@ mysqli_free_result($selectResult);
             	</div>
             	<br><br>
             	<!-- テーブル部分 -->
-            	<table>
+            	<table id="adminTable">
             		<tr>
-            			<th style="width: 25vw; background-color: lightblue;">ISBN</th>
-            			<th style="width: 25vw; background-color: lightblue;">TITLE</th>
-            			<th style="width: 25vw; background-color: lightblue;">価格</th>
-            			<th style="width: 25vw; background-color: lightblue;"></th>
+            			<th>ISBN</th>
+            			<th>TITLE</th>
+            			<th>価格</th>
+            			<th></th>
             		</tr>
             		<?php
                 	foreach($bookLists as $record) {?>
                 		<tr>
-                			<td><a href="./detail.php?isbn=<?=$record['isbn']?>&title=<?=$record['title']?>&price=<?=$record['price']?>"><?=$record['isbn']?></a></td>
+                			<td><a href="./detail.php?isbn=<?=$record['isbn']?>"><?=$record['isbn']?></a></td>
                 			<td><?=$record['title']?></td>
                 			<td><?=$record['price']?>円</td>
                 			<td>
@@ -85,7 +89,7 @@ mysqli_free_result($selectResult);
         	//一般ユーザでログインしている時の画面表示
         	} elseif($authInfo['authority'] == '一般ユーザ') {?>
             	<!-- フォーム部分 -->
-            	<div class="forms" style="display: inline-flex;">
+            	<div class="forms">
                 	<form action="./search.php" method="post">
                 		　ISBN<input type="text" name="isbn">
                 		　TITLE<input type="text" name="title">
@@ -98,13 +102,13 @@ mysqli_free_result($selectResult);
             	</div>
             	<br><br>
                 <!-- テーブル部分 -->
-            	<table>
+            	<table id="ordinalUserTable">
             		<tr>
-            			<th style="width: 20vw; background-color: lightblue;">ISBN</th>
-            			<th style="width: 20vw; background-color: lightblue;">TITLE</th>
-            			<th style="width: 20vw; background-color: lightblue;">価格</th>
-            			<th style="width: 20vw; background-color: lightblue;">購入数</th>
-            			<th style="width: 20vw; background-color: lightblue;"></th>
+            			<th>ISBN</th>
+            			<th>TITLE</th>
+            			<th>価格</th>
+            			<th>購入数</th>
+            			<th></th>
             		</tr>
             		<?php
             		foreach($bookLists as $record) {?>
@@ -128,8 +132,8 @@ mysqli_free_result($selectResult);
         </main>
         <footer>
         	<br><br><br>
-        	<hr style="border: 1px solid blue;">
-        	<p>Copyright (C) 20YY All Rights Reserved.</p>
+        	<hr id="blueLine2">
+        	<p id="copyRight">Copyright (C) 20YY All Rights Reserved.</p>
         </footer>
     </body>
 </html>

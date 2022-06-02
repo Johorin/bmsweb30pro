@@ -48,15 +48,17 @@ if(isset($_POST['loginButton'])) {  //ログインボタンからのアクセス
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="./css/layouts.css">
-		<link rel="stylesheet" type="text/css" href="./css/menu.css">
+		<link rel="stylesheet" type="text/css" href="./css/login.css">
 		<title>ログイン画面</title>
 	</head>
     <body>
     <header>
     	<h2 id="logo">書籍管理システムVer3.0応用</h2>
-    	<hr id="blueLine1">
-    	<h3 id="navSpace">　</h3>
-    	<hr id="blackLine1">
+    	<div id="navSpace">
+    		<hr id="blueLine1">
+    		<h3 id="title">　</h3>
+    		<hr id="blackLine1">
+    	</div>
     </header>
     <main>
     	<center>

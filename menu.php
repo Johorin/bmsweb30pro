@@ -11,18 +11,21 @@ $authInfo = authenticate();
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/layouts.css">
 		<title>メニュー画面</title>
 	</head>
     <body>
         <header>
-        	<h2 align="center">書籍管理システムVer3.0応用</h2>
-        	<hr style="border: 2px solid blue;">
-        	<h3 align="center">MENU</h3>
-        	<div class="loginInfo" style="position: absolute; top: 55px; right: 60px;">
-        		<p>名前：<?=$authInfo['userName']?></p>
-        		<p>権限：<?=$authInfo['authority']?></p>
+        	<h2 id="logo">書籍管理システムVer3.0応用</h2>
+        	<div id="navSpace">
+        		<hr id="blueLine1">
+        		<h3 id="title">MENU</h3>
+            	<div class="loginInfo">
+            		<p>名前：<?=$authInfo['userName']?></p>
+            		<p>権限：<?=$authInfo['authority']?></p>
+            	</div>
+        		<hr id="blackLine1">
         	</div>
-        	<hr style="border: 1px solid black;">
         </header>
         <main>
         	<br>
@@ -58,8 +61,8 @@ $authInfo = authenticate();
         </main>
         <footer>
         	<br><br><br>
-        	<hr style="border: 1px solid blue;">
-        	<p>Copyright (C) 20YY All Rights Reserved.</p>
+        	<hr id="blueLine2">
+        	<p id="copyRight">Copyright (C) 20YY All Rights Reserved.</p>
         </footer>
     </body>
 </html>
