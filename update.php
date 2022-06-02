@@ -74,102 +74,106 @@ if(isset($_GET['updateIsbn']) || isset($_POST['updateButton'])) {    //list.php�
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/layouts.css">
+		<link rel="stylesheet" type="text/css" href="./css/update.css">
 		<title>書籍更新画面</title>
 	</head>
     <body>
-	<header>
-    	<h2 align="center">書籍管理システムVer3.0応用</h2>
-    	<hr style="border: 2px solid blue;">
-    	<div class="nav" style="position: absolute; top: 83px; left: 20px;">
-    		<a href="./menu.php" style="margin-right: 20px;">[メニュー]</a>
-    		<a href="./insert.php" style="margin-right: 20px;">[書籍登録]</a>
-    		<a href="./list.php">[書籍一覧]</a>
-    	</div>
-    	<div class="loginInfo" style="position: absolute; top: 55px; right: 60px;">
-    		<p>名前：<?=$authInfo['userName']?></p>
-    		<p>権限：<?=$authInfo['authority']?></p>
-    	</div>
-    	<h3 align="center">書籍変更</h3>
-    	<hr style="border: 1px solid black;">
-    </header>
-    <main>
-    	<br><br>
-    	<?php
-    	//初期画面の表示
-    	if(!isset($_POST['updateButton'])) {?>
-    	<center>
-        	<form action="./update.php" method="post">
-            	<table>
+    	<header>
+        	<h2 id="title">書籍管理システムVer3.0応用</h2>
+        	<div id="navSpace">
+        		<hr id="blueLine1">
+            	<div class="float-left">
+            		<a href="./menu.php" class="nav">[メニュー]</a>
+            		<a href="./insert.php" class="nav">[書籍登録]</a>
+            		<a href="./list.php" class="nav">[書籍一覧]</a>
+            	</div>
+        		<h3 id="title">書籍変更</h3>
+            	<div class="loginInfo">
+            		<p>名前：<?=$authInfo['userName']?></p>
+            		<p>権限：<?=$authInfo['authority']?></p>
+            	</div>
+        		<hr id="blackLine1">
+        	</div>
+        </header>
+        <main>
+        	<br><br>
+        	<?php
+        	//初期画面の表示
+        	if(!isset($_POST['updateButton'])) {?>
+        	<center>
+            	<form action="./update.php" method="post">
+                	<table id="initialTable">
+                		<tr>
+                			<th></th>
+                			<th>&lt;&lt;変更前情報&gt;&gt;</th>
+                			<th>&lt;&lt;変更後情報&gt;&gt;</th>
+                		</tr>
+                		<tr>
+                			<th>ISBN</th>
+                			<td class="updateBefore" style="background-color: aqua;"><?=$record['isbn']?></td>
+                			<td><?=$record['isbn']?></td>
+                		</tr>
+                		<tr>
+                			<th>TITLE</th>
+                			<td class="updateBefore" style="background-color: aqua;"><?=$record['title']?></td>
+                			<td><input type="text" name="newTitle" id="newTitle"></td>
+                		</tr>
+                		<tr>
+                			<th>価格</th>
+                			<td class="updateBefore" style="background-color: aqua;"><?=$record['price']?>円</td>
+                			<td><input type="text" name="newPrice" id="newPrice">円</td>
+                		</tr>
+                	</table>
+        			<div class="err_text_title" id="err_text_title"></div>
+        			<div class="err_text_price" id="err_text_price"></div>
+        			<div class="err_text_priceNum" id="err_text_priceNum"></div>
+                	<br><br><br><br>
+                	<input type="hidden" name="isbn" value="<?=$record['isbn']?>">
+                	<input type="hidden" name="oldTitle" value="<?=$record['title']?>">
+                	<input type="hidden" name="oldPrice" value="<?=$record['price']?>">
+                	<input type="submit" name="updateButton" onclick="return do_submit('update');" value="変更完了">
+            	</form>
+        	</center>
+        	<?php
+        	//自分自身からの遷移の場合の表示
+        	} else {?>
+        	<center>
+            	<table id="updatedTable">
             		<tr>
-            			<th style="background-color: lightblue;"></th>
-            			<th style="background-color: lightblue;">&lt;&lt;変更前情報&gt;&gt;</th>
-            			<th style="background-color: lightblue;">&lt;&lt;変更後情報&gt;&gt;</th>
+            			<th></th>
+            			<th>&lt;&lt;変更前情報&gt;&gt;</th>
+            			<th>&lt;&lt;変更後情報&gt;&gt;</th>
             		</tr>
             		<tr>
-            			<th style="background-color: lightblue;">ISBN</th>
-            			<td style="background-color: aqua;"><?=$record['isbn']?></td>
-            			<td><?=$record['isbn']?></td>
+            			<th>ISBN</th>
+            			<td class="updateBefore"><?=$isbn?></td>
+            			<td><?=$isbn?></td>
             		</tr>
             		<tr>
-            			<th style="background-color: lightblue;">TITLE</th>
-            			<td style="background-color: aqua;"><?=$record['title']?></td>
-            			<td><input type="text" name="newTitle" id="newTitle"></td>
+            			<th>TITLE</th>
+            			<td class="updateBefore"><?=$oldTitle?></td>
+            			<td><?=$newTitle?></td>
             		</tr>
             		<tr>
-            			<th style="background-color: lightblue;">価格</th>
-            			<td style="background-color: aqua;"><?=$record['price']?>円</td>
-            			<td><input type="text" name="newPrice" id="newPrice">円</td>
+            			<th>価格</th>
+            			<td class="updateBefore"><?=$oldPrice?>円</td>
+            			<td><?=$newPrice?>円</td>
             		</tr>
             	</table>
-    			<div class="err_text_title" id="err_text_title"></div>
-    			<div class="err_text_price" id="err_text_price"></div>
-    			<div class="err_text_priceNum" id="err_text_priceNum"></div>
-            	<br><br><br><br>
-            	<input type="hidden" name="isbn" value="<?=$record['isbn']?>">
-            	<input type="hidden" name="oldTitle" value="<?=$record['title']?>">
-            	<input type="hidden" name="oldPrice" value="<?=$record['price']?>">
-            	<input type="submit" name="updateButton" value="変更完了">
-        	</form>
-    	</center>
-    	<?php
-    	//自分自身からの遷移の場合の表示
-    	} else {?>
-    	<center>
-        	<table>
-        		<tr>
-        			<th style="background-color: lightblue;"></th>
-        			<th style="background-color: lightblue;">&lt;&lt;変更前情報&gt;&gt;</th>
-        			<th style="background-color: lightblue;">&lt;&lt;変更後情報&gt;&gt;</th>
-        		</tr>
-        		<tr>
-        			<th style="background-color: lightblue;">ISBN</th>
-        			<td style="background-color: aqua;"><?=$isbn?></td>
-        			<td><?=$isbn?></td>
-        		</tr>
-        		<tr>
-        			<th style="background-color: lightblue;">TITLE</th>
-        			<td style="background-color: aqua;"><?=$oldTitle?></td>
-        			<td><?=$newTitle?></td>
-        		</tr>
-        		<tr>
-        			<th style="background-color: lightblue;">価格</th>
-        			<td style="background-color: aqua;"><?=$oldPrice?>円</td>
-        			<td><?=$newPrice?>円</td>
-        		</tr>
-        	</table>
-        	<br><br>
-        	<p>上記内容でデータを更新しました。</p>
-        	<br><br>
-        	<a href="./list.php">書籍一覧へ戻る</a>
-    	</center>
-    	<?php
-    	}?>
-    </main>
-    <footer>
-    	<br><br><br>
-    	<hr style="border: 1px solid blue;">
-    	<p>Copyright (C) 20YY All Rights Reserved.</p>
-    </footer>
+            	<br><br>
+            	<p>上記内容でデータを更新しました。</p>
+            	<br><br>
+            	<a href="./list.php">書籍一覧へ戻る</a>
+        	</center>
+        	<?php
+        	}?>
+        </main>
+        <footer>
+        	<br><br><br>
+        	<hr id="blueLine2">
+        	<p id="copyRight">Copyright (C) 20YY All Rights Reserved.</p>
+        </footer>
     </body>
 	<script src="./ajax/jquery-3.6.0.min.js"></script>
 	<script src="./ajax/dataCheck.js"></script>

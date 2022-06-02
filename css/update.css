@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#initialTable th {
+	background-color: lightblue;
+}
+
+#initialTable td.updateBefore {
+	background-color: aqua;
+}
+
+#updatedTable th {
+	background-color: lightblue;
+}
+
+#updatedTable td.updateBefore {
+	background-color: aqua;
+}

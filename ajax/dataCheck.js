@@ -29,12 +29,12 @@ $(function() {
 		CheckData.check(_textbox, 'price');
 	});
 
-	$("form").submit(function() {
-		var validationResult = do_submit();
-		if(!validationResult) {
-			return false;
-		}
-	});
+//	$("form").submit(function() {
+//		var validationResult = do_submit();
+//		if(!validationResult) {
+//			return false;
+//		}
+//	});
 });
 
 class CheckData {
@@ -76,7 +76,7 @@ class CheckData {
 			}
 			_result = false;
 		}
-		if((target === 'price') && is_numeric(_textbox)) {
+		if((target === 'price') && isNaN(_textbox)) {
 			$("#err_text_" + target + "Num").append('<p style="color: red;">価格は数値を入力して下さい。</p>');
 		}
 
@@ -84,33 +84,50 @@ class CheckData {
 	}
 }
 
-function do_check() {
+function do_check(target) {
 	var result = true;
 	var check_result = true;
 
 	$(".err_text").empty();
 
-	//user
-	var _textbox = $("#user").val();
-	result = CheckData.check(_textbox);
-	if(!result) {
-		check_result = result;
-	}
-
-	//pass
-	var _textbox = $("#pass").val();
-	result = CheckData.check(_textbox);
-	if(!result) {
-		check_result = result;
+	switch(target) {
+	case 'login':
+		//user
+		var _textbox = $("#user").val();
+		result = CheckData.check(_textbox, 'user');
+		if(!result) {
+			check_result = result;
+		}
+		//pass
+		var _textbox = $("#pass").val();
+		result = CheckData.check(_textbox, 'pass');
+		if(!result) {
+			check_result = result;
+		}
+		break;
+	case 'update':
+		//title
+		var _textbox = $("#newTitle").val();
+		result = CheckData.check(_textbox, 'title');
+		if(!result) {
+			check_result = result;
+		}
+		//price
+		var _textbox = $("#newPrice").val();
+		result = CheckData.check(_textbox, 'price');
+		if(!result) {
+			check_result = result;
+		}
+		break;
 	}
 
 	//上記条件が全てtrueならcheck_resultもtrue
 	return check_result;
 }
 
-function do_submit() {
+function do_submit(target) {
 //	$(btn).css("pointer-events", "none");
-	var result = do_check();
+	var result = do_check(target);
 
 	if(result) {
 		alert("入力チェックOKです！");

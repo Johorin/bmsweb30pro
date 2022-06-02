@@ -77,7 +77,7 @@ if(isset($_POST['loginButton'])) {  //ログインボタンからのアクセス
     			<div class="err_text_user" id="err_text_user"></div>
     			<div class="err_text_pass" id="err_text_pass"></div>
         		<br><br>
-        		<input type="submit" name="loginButton" value="ログイン">
+        		<input type="submit" name="loginButton" onclick="return do_submit('login');" value="ログイン">
     		</form>
     	</center>
     </main>
