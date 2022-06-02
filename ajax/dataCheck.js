@@ -28,6 +28,13 @@ $(function() {
 		//クラスメソッドcheck_loginで入力チェックとエラーメッセージ表示処理を実行
 		CheckData.check(_textbox, 'price');
 	});
+
+	$("form").submit(function() {
+		var validationResult = do_submit();
+		if(!validationResult) {
+			return false;
+		}
+	});
 });
 
 class CheckData {
@@ -107,8 +114,9 @@ function do_submit() {
 
 	if(result) {
 		alert("入力チェックOKです！");
+		return true;
 	} else {
-//		$(btn).css("pointer-events", "inherit");
+		return false;
 	}
 }
 
